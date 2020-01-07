@@ -39,18 +39,22 @@ exports.readAll = (callback) => {
         fileArray.push(fileObj);
       });
       callback(null, fileArray);
+      // console.log('first', fileArray);
+      return fileArray;
     }
   });
 };
 
 exports.readOne = (id, callback) => {
-  var text = items[id];
-  if (!text) {
-    callback(new Error(`No item with id: ${id}`));
-  } else {
-    callback(null, { id, text });
-  }
-}
+  fs.readFile(`${exports.dataDir}/${id}.txt`, (err, data) => {
+    if (err) {
+      callback(new Error(`No item with id: ${id}`));
+    } else {
+      var text = data.toString();
+      callback(null, { id, text });
+    }
+  });
+};
 
 exports.update = (id, text, callback) => {
   var item = items[id];
