@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const sprintf = require('sprintf-js').sprintf;
 
-var counter = 0;
+// var counter = 0;
 
 // Private helper functions ////////////////////////////////////////////////////
 
@@ -40,9 +40,10 @@ const writeCounter = (count, callback) => {
 
 // counter = counter + 1;
 exports.getNextUniqueId = (callback) => {
-  readCounter((err, count) => {
-    counter = count + 1;
-    writeCounter(counter, callback);
+  readCounter((err, count) => { // maybe previous count for count - readability
+    writeCounter(count + 1, callback);
+    // counter = count + 1;
+    // writeCounter(counter, callback);
   });
 };
 
